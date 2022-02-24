@@ -1,0 +1,31 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "rewritten discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefenetlyNotSimon/DiscordBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "js",
+    "javascript"
+  ],
+  "author": "DefenetlyNotSimon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DefenetlyNotSimon/DiscordBot/issues"
+  },
+  "homepage": "https://github.com/DefenetlyNotSimon/DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0"
+  }
+}
