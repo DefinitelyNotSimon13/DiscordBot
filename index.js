@@ -7,6 +7,7 @@ const { token } = require('./config.json');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS]});
 module.exports = client;
 
+
 //Commands Collection
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
