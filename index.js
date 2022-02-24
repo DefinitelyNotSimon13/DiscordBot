@@ -17,6 +17,8 @@ for (const file  of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
+
+/*
 //Läuft einmal wenn client bereit ist
 client.once('ready', () => {
     console.log('Client ist readyyy!');
@@ -39,6 +41,7 @@ client.on('interactionCreate', async interaction => {
     }
   
 });
+*/
 
 //Login to Discord mit Token
 client.login(token);
