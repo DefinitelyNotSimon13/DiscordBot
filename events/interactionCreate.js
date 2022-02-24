@@ -1,7 +1,9 @@
+const client = require("../index.js");
+
 module.exports = {
 	name: 'interactionCreate',
 	execute(interaction) {
-        
+
 	console.log(`${interaction.user.tag} in #${interaction.channel.name}: Hat eine Interaktion getriggert.`)
 
 	if (!interaction.isCommand()) return;
@@ -11,10 +13,10 @@ module.exports = {
     if (!command) return; 
 
     try {
-        await command.execute(interaction);
+        command.execute(interaction);
     } catch(error) {
         console.error(error);
-        await interaction.reply({ content: 'Es gab ein Problem beim ausführen des Commands!', ephemeral: true});
+        interaction.reply({ content: 'Es gab ein Problem beim ausführen des Commands!', ephemeral: true});
     }
 	},
 };

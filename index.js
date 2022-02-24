@@ -5,6 +5,7 @@ const { token } = require('./config.json');
 
 //Neue Client Instanz
 const client = new Client({ intents: [Intents.FLAGS.GUILDS]});
+module.exports = client;
 
 //Commands Collection
 client.commands = new Collection();
@@ -15,6 +16,19 @@ for (const file  of commandFiles) {
     //Neues Item in der Kollektion
     //Mit Key als Kommand Name bla bla
     client.commands.set(command.data.name, command);
+}
+
+//Event Dateien
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`)
+    if(event.once) {
+        client.once(event.name, (...args) => event.execute(...args));
+    } else {
+        client.on(event.name, (...args) => event.execute(...args));
+    }
 }
 
 
