@@ -1,9 +1,21 @@
 //Requirements
-const { Client, Intents} = require('discord.js');
+const fs = require('fs');
+const { Client, Intents, Collection} = require('discord.js');
 const { token } = require('./config.json');
 
 //Neue Client Instanz
 const client = new Client({ intents: [Intents.FLAGS.GUILDS]});
+
+//Commands Collection
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file  of commandFiles) {
+    const command = require(`./commands/${file}`)
+    //Neues Item in der Kollektion
+    //Mit Key als Kommand Name bla bla
+    client.commands.set(command.data.name, command);
+}
 
 //Läuft einmal wenn client bereit ist
 client.once('ready', () => {
@@ -11,27 +23,20 @@ client.once('ready', () => {
 });
 
 //Client tut etwas onItneraction
-
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
+    const command  = client.commands.get(interaction.commandName);
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!');
-	}
-    
-    
-    //Alter Dingens
-    /*if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply(`Server Name: ${interaction.guild.name}\nMitgliederzahl: ${interaction.guild.memberCount}`);
-	} else if (commandName === 'user') {
-		await interaction.reply(`Dein Tag: ${interaction.user.tag}\Deine Id: ${interaction.user.id}`);
-	}*/
+    if (!command) return; 
+
+    try {
+        await command.execute(interaction);
+    } catch(error) {
+        console.error(error);
+        await interaction.reply({ content: 'Es gab ein Problem beim ausführen des Commands!', ephemeral: true});
+    }
+  
 });
 
 //Login to Discord mit Token
