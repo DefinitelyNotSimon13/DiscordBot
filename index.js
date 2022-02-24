@@ -24,6 +24,7 @@ client.once('ready', () => {
 
 //Client tut etwas onItneraction
 client.on('interactionCreate', async interaction => {
+    console.log(`${interaction.user.tag} in #${interaction.channel.name} hat eine Interaktion getriggert.`)
 	if (!interaction.isCommand()) return;
 
     const command  = client.commands.get(interaction.commandName);
