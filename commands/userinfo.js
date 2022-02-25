@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { logo } = require('../../config.json');
+const { logo } = require('../config.json');
 
 const { SlashCommandBuilder} = require('@discordjs/builders');
 
