@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const { logo } = require('../config.json');
 
 const { SlashCommandBuilder} = require('@discordjs/builders');
-const { DiscordAPIError } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
